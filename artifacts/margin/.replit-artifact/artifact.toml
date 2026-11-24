@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Margin — Math, one step at a time"
+description = "A focused student math assistant. Ask textbook questions, highlight any part of a solution, and explore a contextual explanation in a closable side panel without cluttering the original answer."
+version = "1.0.0"
+id = "artifacts/margin"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 24074
+
+[services.development]
+run = "pnpm --filter @workspace/margin run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/margin", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/margin/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "24074"
+BASE_PATH = "/"

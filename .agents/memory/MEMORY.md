@@ -1,0 +1,1 @@
+- [Math assistant purpose](math-assistant-purpose.md) — preserve the original solution; explain highlighted portions in a closable side panel, not a growing chat.

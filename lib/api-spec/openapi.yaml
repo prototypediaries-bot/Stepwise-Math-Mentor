@@ -1,0 +1,113 @@
+openapi: 3.1.0
+info:
+  # Do not change the title, if the title changes, the import paths will be broken
+  title: Api
+  version: 0.1.0
+  description: API specification
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+paths:
+  /math/solve:
+    post:
+      operationId: solveMath
+      tags: [math]
+      summary: Solve a textbook math question
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MathInput"
+      responses:
+        "200":
+          description: Step-by-step solution
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MathSolution"
+  /math/explain:
+    post:
+      operationId: explainMath
+      tags: [math]
+      summary: Explain a selected part without changing the solution
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExplanationInput"
+      responses:
+        "200":
+          description: Focused explanation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MathExplanation"
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      description: Returns server health status
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+components:
+  schemas:
+    MathInput:
+      type: object
+      required: [question]
+      properties:
+        question:
+          type: string
+          minLength: 1
+          maxLength: 4000
+    MathStep:
+      type: object
+      required: [title, content, equation]
+      properties:
+        title: { type: string }
+        content: { type: string }
+        equation: { type: string }
+    MathSolution:
+      type: object
+      required: [title, subject, introduction, steps, answer]
+      properties:
+        title: { type: string }
+        subject: { type: string }
+        introduction: { type: string }
+        steps:
+          type: array
+          items:
+            $ref: "#/components/schemas/MathStep"
+        answer: { type: string }
+    ExplanationInput:
+      type: object
+      required: [question, solution, selectedText]
+      properties:
+        question: { type: string, minLength: 1, maxLength: 4000 }
+        solution: { type: string, minLength: 1, maxLength: 30000 }
+        selectedText: { type: string, minLength: 1, maxLength: 8000 }
+    MathExplanation:
+      type: object
+      required: [title, explanation, takeaway]
+      properties:
+        title: { type: string }
+        explanation: { type: string }
+        takeaway: { type: string }
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+      required:
+        - status
+
