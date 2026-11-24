@@ -4,13 +4,14 @@ A student math assistant that explains highlighted portions of a solution in a c
 
 ## Run & Operate
 
-- `pnpm --filter @workspace/api-server run dev` — run the API server (port 5000)
+- `pnpm --filter @workspace/api-server run dev` — API server; use its managed workflow for the assigned port
 - `pnpm --filter @workspace/margin run dev` — frontend, started through its managed workflow
 - `pnpm run typecheck` — full typecheck across all packages
 - `pnpm run build` — typecheck + build all packages
 - `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
 - `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
 - AI uses Replit-managed OpenAI integration configuration; never expose credentials in client code.
+- Authentication uses Replit OIDC with PostgreSQL sessions. Private picture uploads require App Storage configuration.
 
 ## Stack
 
@@ -31,11 +32,13 @@ _Populate as you build — non-obvious choices a reader couldn't infer from the 
 
 ## Product
 
-- Ask textbook math questions and read structured solutions with rendered equations.
+- Ask math, engineering, or science questions and read structured solutions with rendered equations.
 - Highlight solution text to open a focused explanation alongside the original solution.
 - Use per-step explanation actions on touch devices or with a keyboard.
 - Save, reopen, and delete problems in browser-local history. No account or cross-device sync.
 - The initial worked example is explicitly labeled; new questions and explanations use live AI.
+- Picture uploads use signed URLs directly to private App Storage. The API checks ownership and actual file type/size before using images.
+- AI answers are educational assistance, not verified engineering designs; important results require independent checking.
 
 ## User preferences
 

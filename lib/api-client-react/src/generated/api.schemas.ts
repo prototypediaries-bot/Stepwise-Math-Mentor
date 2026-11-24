@@ -6,18 +6,35 @@
  * OpenAPI spec version: 0.1.0
  */
 export interface MathInput {
-  /**
-     * @minLength 1
-     * @maxLength 4000
-     */
+  /** @maxLength 12000 */
   question: string;
+  /** @pattern ^/objects/uploads/[a-zA-Z0-9-]+$ */
+  imagePath?: string;
 }
+
+export type MathStepKind = typeof MathStepKind[keyof typeof MathStepKind];
+
+
+export const MathStepKind = {
+  calculation: 'calculation',
+  concept: 'concept',
+} as const;
 
 export interface MathStep {
   title: string;
   content: string;
   equation: string;
+  kind?: MathStepKind;
 }
+
+export type MathSolutionProblemType = typeof MathSolutionProblemType[keyof typeof MathSolutionProblemType];
+
+
+export const MathSolutionProblemType = {
+  worked: 'worked',
+  conceptual: 'conceptual',
+  mixed: 'mixed',
+} as const;
 
 export interface MathSolution {
   title: string;
@@ -25,17 +42,28 @@ export interface MathSolution {
   introduction: string;
   steps: MathStep[];
   answer: string;
+  interpretedQuestion?: string;
+  problemType?: MathSolutionProblemType;
 }
+
+export type ExplanationInputMode = typeof ExplanationInputMode[keyof typeof ExplanationInputMode];
+
+
+export const ExplanationInputMode = {
+  auto: 'auto',
+  step: 'step',
+  concept: 'concept',
+} as const;
 
 export interface ExplanationInput {
   /**
      * @minLength 1
-     * @maxLength 4000
+     * @maxLength 12000
      */
   question: string;
   /**
      * @minLength 1
-     * @maxLength 30000
+     * @maxLength 50000
      */
   solution: string;
   /**
@@ -43,15 +71,103 @@ export interface ExplanationInput {
      * @maxLength 8000
      */
   selectedText: string;
+  mode?: ExplanationInputMode;
 }
+
+export type MathExplanationKind = typeof MathExplanationKind[keyof typeof MathExplanationKind];
+
+
+export const MathExplanationKind = {
+  step: 'step',
+  concept: 'concept',
+  mixed: 'mixed',
+} as const;
 
 export interface MathExplanation {
   title: string;
   explanation: string;
   takeaway: string;
+  kind?: MathExplanationKind;
+}
+
+export interface AuthUser {
+  id: string;
+  /** @nullable */
+  email: string | null;
+  /** @nullable */
+  firstName: string | null;
+  /** @nullable */
+  lastName: string | null;
+  /** @nullable */
+  profileImageUrl: string | null;
+}
+
+export interface AuthUserEnvelope {
+  user: AuthUser | null;
+}
+
+export interface MobileTokenExchangeRequest {
+  /** @minLength 1 */
+  code: string;
+  /** @minLength 1 */
+  code_verifier: string;
+  redirect_uri: string;
+  /** @minLength 1 */
+  state: string;
+  /** @minLength 1 */
+  nonce?: string;
+}
+
+export interface MobileTokenExchangeSuccess {
+  token: string;
+}
+
+export const LogoutSuccessValue = {
+  success: true,
+} as const;
+export type LogoutSuccess = typeof LogoutSuccessValue;
+
+export type UploadUrlRequestContentType = typeof UploadUrlRequestContentType[keyof typeof UploadUrlRequestContentType];
+
+
+export const UploadUrlRequestContentType = {
+  'image/jpeg': 'image/jpeg',
+  'image/png': 'image/png',
+  'image/webp': 'image/webp',
+} as const;
+
+export interface UploadUrlRequest {
+  /**
+     * @minLength 1
+     * @maxLength 255
+     */
+  name: string;
+  /**
+     * @minimum 1
+     * @maximum 8388608
+     */
+  size: number;
+  contentType: UploadUrlRequestContentType;
+}
+
+export interface UploadUrlResponse {
+  uploadURL: string;
+  objectPath: string;
+}
+
+export interface ErrorEnvelope {
+  error: string;
 }
 
 export interface HealthStatus {
   status: string;
 }
+
+export type BeginBrowserLoginParams = {
+returnTo?: string;
+};
+
+export type LogoutBrowserSessionParams = {
+returnTo?: string;
+};
 

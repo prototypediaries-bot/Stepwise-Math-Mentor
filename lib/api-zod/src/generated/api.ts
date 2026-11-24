@@ -8,15 +8,104 @@
 import * as zod from 'zod';
 
 
+export const GetCurrentAuthUserResponse = zod.object({
+  "user": zod.union([zod.object({
+  "id": zod.string(),
+  "email": zod.string().nullable(),
+  "firstName": zod.string().nullable(),
+  "lastName": zod.string().nullable(),
+  "profileImageUrl": zod.string().nullable()
+}),zod.null()])
+})
+
+
+export const BeginBrowserLoginQueryParams = zod.object({
+  "returnTo": zod.coerce.string().optional()
+})
+
+export const BeginBrowserLoginResponse = zod.void()
+
+
+export const HandleBrowserLoginCallbackResponse = zod.void()
+
+
+export const LogoutBrowserSessionQueryParams = zod.object({
+  "returnTo": zod.coerce.string().optional()
+})
+
+export const LogoutBrowserSessionResponse = zod.void()
+
+
+
+
+
+
+
+
+export const ExchangeMobileAuthorizationCodeBody = zod.object({
+  "code": zod.string().min(1),
+  "code_verifier": zod.string().min(1),
+  "redirect_uri": zod.url(),
+  "state": zod.string().min(1),
+  "nonce": zod.string().min(1).optional()
+})
+
+export const ExchangeMobileAuthorizationCodeResponse = zod.object({
+  "token": zod.string()
+})
+
+
+export const LogoutMobileSessionResponse = zod.object({
+  "success": zod.literal(true)
+})
+
+
+/**
+ * @summary Request a private picture upload
+ */
+export const requestUploadUrlBodyNameMax = 255;
+
+export const requestUploadUrlBodySizeMax = 8388608;
+
+
+
+export const RequestUploadUrlBody = zod.object({
+  "name": zod.string().min(1).max(requestUploadUrlBodyNameMax),
+  "size": zod.int().min(1).max(requestUploadUrlBodySizeMax),
+  "contentType": zod.enum(['image/jpeg', 'image/png', 'image/webp'])
+})
+
+export const RequestUploadUrlResponse = zod.object({
+  "uploadURL": zod.url(),
+  "objectPath": zod.string()
+})
+
+
+export const GetPublicObjectParams = zod.object({
+  "filePath": zod.coerce.string()
+})
+
+export const GetPublicObjectResponse = zod.unknown()
+
+
+export const GetStorageObjectParams = zod.object({
+  "objectPath": zod.coerce.string()
+})
+
+export const GetStorageObjectResponse = zod.unknown()
+
+
 /**
  * @summary Solve a textbook math question
  */
-export const solveMathBodyQuestionMax = 4000;
+export const solveMathBodyQuestionMax = 12000;
 
+export const solveMathBodyImagePathRegExp = new RegExp('^/objects/uploads/[a-zA-Z0-9-]+$');
 
 
 export const SolveMathBody = zod.object({
-  "question": zod.string().min(1).max(solveMathBodyQuestionMax)
+  "question": zod.string().max(solveMathBodyQuestionMax),
+  "imagePath": zod.string().regex(solveMathBodyImagePathRegExp).optional()
 })
 
 export const SolveMathResponse = zod.object({
@@ -26,33 +115,38 @@ export const SolveMathResponse = zod.object({
   "steps": zod.array(zod.object({
   "title": zod.string(),
   "content": zod.string(),
-  "equation": zod.string()
+  "equation": zod.string(),
+  "kind": zod.enum(['calculation', 'concept']).optional()
 })),
-  "answer": zod.string()
+  "answer": zod.string(),
+  "interpretedQuestion": zod.string().optional(),
+  "problemType": zod.enum(['worked', 'conceptual', 'mixed']).optional()
 })
 
 
 /**
  * @summary Explain a selected part without changing the solution
  */
-export const explainMathBodyQuestionMax = 4000;
+export const explainMathBodyQuestionMax = 12000;
 
-export const explainMathBodySolutionMax = 30000;
+export const explainMathBodySolutionMax = 50000;
 
 export const explainMathBodySelectedTextMax = 8000;
 
-
+export const explainMathBodyModeDefault = `auto`;
 
 export const ExplainMathBody = zod.object({
   "question": zod.string().min(1).max(explainMathBodyQuestionMax),
   "solution": zod.string().min(1).max(explainMathBodySolutionMax),
-  "selectedText": zod.string().min(1).max(explainMathBodySelectedTextMax)
+  "selectedText": zod.string().min(1).max(explainMathBodySelectedTextMax),
+  "mode": zod.enum(['auto', 'step', 'concept']).default(explainMathBodyModeDefault)
 })
 
 export const ExplainMathResponse = zod.object({
   "title": zod.string(),
   "explanation": zod.string(),
-  "takeaway": zod.string()
+  "takeaway": zod.string(),
+  "kind": zod.enum(['step', 'concept', 'mixed']).optional()
 })
 
 

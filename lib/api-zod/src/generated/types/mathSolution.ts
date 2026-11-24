@@ -5,6 +5,7 @@
  * API specification
  * OpenAPI spec version: 0.1.0
  */
+import type { MathSolutionProblemType } from './mathSolutionProblemType';
 import type { MathStep } from './mathStep';
 
 export interface MathSolution {
@@ -13,4 +14,6 @@ export interface MathSolution {
   introduction: string;
   steps: MathStep[];
   answer: string;
+  interpretedQuestion?: string;
+  problemType?: MathSolutionProblemType;
 }

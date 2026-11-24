@@ -5,16 +5,17 @@
  * API specification
  * OpenAPI spec version: 0.1.0
  */
+import type { ExplanationInputMode } from './explanationInputMode';
 
 export interface ExplanationInput {
   /**
      * @minLength 1
-     * @maxLength 4000
+     * @maxLength 12000
      */
   question: string;
   /**
      * @minLength 1
-     * @maxLength 30000
+     * @maxLength 50000
      */
   solution: string;
   /**
@@ -22,4 +23,5 @@ export interface ExplanationInput {
      * @maxLength 8000
      */
   selectedText: string;
+  mode?: ExplanationInputMode;
 }

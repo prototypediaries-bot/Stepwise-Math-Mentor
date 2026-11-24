@@ -5,9 +5,11 @@
  * API specification
  * OpenAPI spec version: 0.1.0
  */
+import type { MathExplanationKind } from './mathExplanationKind';
 
 export interface MathExplanation {
   title: string;
   explanation: string;
   takeaway: string;
+  kind?: MathExplanationKind;
 }

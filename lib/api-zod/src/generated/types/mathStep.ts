@@ -5,9 +5,11 @@
  * API specification
  * OpenAPI spec version: 0.1.0
  */
+import type { MathStepKind } from './mathStepKind';
 
 export interface MathStep {
   title: string;
   content: string;
   equation: string;
+  kind?: MathStepKind;
 }

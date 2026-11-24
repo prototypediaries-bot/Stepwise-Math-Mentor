@@ -7,9 +7,8 @@
  */
 
 export interface MathInput {
-  /**
-     * @minLength 1
-     * @maxLength 4000
-     */
+  /** @maxLength 12000 */
   question: string;
+  /** @pattern ^/objects/uploads/[a-zA-Z0-9-]+$ */
+  imagePath?: string;
 }

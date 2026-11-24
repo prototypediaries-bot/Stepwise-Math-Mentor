@@ -11,6 +11,94 @@ tags:
   - name: health
     description: Health operations
 paths:
+  /auth/user:
+    get:
+      operationId: getCurrentAuthUser
+      responses:
+        "200":
+          description: Current sign-in state
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/AuthUserEnvelope" }
+  /login:
+    get:
+      operationId: beginBrowserLogin
+      parameters:
+        - { name: returnTo, in: query, schema: { type: string } }
+      responses:
+        "302": { description: Sign-in redirect }
+  /callback:
+    get:
+      operationId: handleBrowserLoginCallback
+      responses:
+        "302": { description: Sign-in callback }
+  /logout:
+    get:
+      operationId: logoutBrowserSession
+      parameters:
+        - { name: returnTo, in: query, schema: { type: string } }
+      responses:
+        "302": { description: Sign-out redirect }
+  /mobile-auth/token-exchange:
+    post:
+      operationId: exchangeMobileAuthorizationCode
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/MobileTokenExchangeRequest" }
+      responses:
+        "200":
+          description: Session created
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/MobileTokenExchangeSuccess" }
+  /mobile-auth/logout:
+    post:
+      operationId: logoutMobileSession
+      responses:
+        "200":
+          description: Signed out
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/LogoutSuccess" }
+  /storage/uploads/request-url:
+    post:
+      operationId: requestUploadUrl
+      summary: Request a private picture upload
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/UploadUrlRequest" }
+      responses:
+        "200":
+          description: Direct upload URL
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/UploadUrlResponse" }
+  /storage/public-objects/{filePath}:
+    get:
+      operationId: getPublicObject
+      parameters:
+        - { name: filePath, in: path, required: true, schema: { type: string } }
+      responses:
+        "200":
+          description: Public file
+          content:
+            "*/*":
+              schema: { type: string, format: binary }
+  /storage/objects/{objectPath}:
+    get:
+      operationId: getStorageObject
+      parameters:
+        - { name: objectPath, in: path, required: true, schema: { type: string } }
+      responses:
+        "200":
+          description: Private picture owned by the signed-in user
+          content:
+            "*/*":
+              schema: { type: string, format: binary }
   /math/solve:
     post:
       operationId: solveMath
@@ -68,8 +156,10 @@ components:
       properties:
         question:
           type: string
-          minLength: 1
-          maxLength: 4000
+          maxLength: 12000
+        imagePath:
+          type: string
+          pattern: '^/objects/uploads/[a-zA-Z0-9-]+$'
     MathStep:
       type: object
       required: [title, content, equation]
@@ -77,6 +167,7 @@ components:
         title: { type: string }
         content: { type: string }
         equation: { type: string }
+        kind: { type: string, enum: [calculation, concept] }
     MathSolution:
       type: object
       required: [title, subject, introduction, steps, answer]
@@ -89,13 +180,16 @@ components:
           items:
             $ref: "#/components/schemas/MathStep"
         answer: { type: string }
+        interpretedQuestion: { type: string }
+        problemType: { type: string, enum: [worked, conceptual, mixed] }
     ExplanationInput:
       type: object
       required: [question, solution, selectedText]
       properties:
-        question: { type: string, minLength: 1, maxLength: 4000 }
-        solution: { type: string, minLength: 1, maxLength: 30000 }
+        question: { type: string, minLength: 1, maxLength: 12000 }
+        solution: { type: string, minLength: 1, maxLength: 50000 }
         selectedText: { type: string, minLength: 1, maxLength: 8000 }
+        mode: { type: string, enum: [auto, step, concept], default: auto }
     MathExplanation:
       type: object
       required: [title, explanation, takeaway]
@@ -103,6 +197,61 @@ components:
         title: { type: string }
         explanation: { type: string }
         takeaway: { type: string }
+        kind: { type: string, enum: [step, concept, mixed] }
+    AuthUser:
+      type: object
+      required: [id, email, firstName, lastName, profileImageUrl]
+      properties:
+        id: { type: string }
+        email: { type: [string, "null"] }
+        firstName: { type: [string, "null"] }
+        lastName: { type: [string, "null"] }
+        profileImageUrl: { type: [string, "null"] }
+    AuthUserEnvelope:
+      type: object
+      required: [user]
+      properties:
+        user:
+          oneOf:
+            - { $ref: "#/components/schemas/AuthUser" }
+            - { type: "null" }
+    MobileTokenExchangeRequest:
+      type: object
+      required: [code, code_verifier, redirect_uri, state]
+      properties:
+        code: { type: string, minLength: 1 }
+        code_verifier: { type: string, minLength: 1 }
+        redirect_uri: { type: string, format: uri }
+        state: { type: string, minLength: 1 }
+        nonce: { type: string, minLength: 1 }
+    MobileTokenExchangeSuccess:
+      type: object
+      required: [token]
+      properties:
+        token: { type: string }
+    LogoutSuccess:
+      type: object
+      required: [success]
+      properties:
+        success: { type: boolean, const: true }
+    UploadUrlRequest:
+      type: object
+      required: [name, size, contentType]
+      properties:
+        name: { type: string, minLength: 1, maxLength: 255 }
+        size: { type: integer, minimum: 1, maximum: 8388608 }
+        contentType: { type: string, enum: [image/jpeg, image/png, image/webp] }
+    UploadUrlResponse:
+      type: object
+      required: [uploadURL, objectPath]
+      properties:
+        uploadURL: { type: string, format: uri }
+        objectPath: { type: string }
+    ErrorEnvelope:
+      type: object
+      required: [error]
+      properties:
+        error: { type: string }
     HealthStatus:
       type: object
       properties:
