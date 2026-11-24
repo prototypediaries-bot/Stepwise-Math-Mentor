@@ -377,7 +377,7 @@ export default function Workspace() {
                   <p className="mt-2 text-xs text-muted-foreground">Misread something? <button onClick={() => { setDraft(s.interpretedQuestion ?? ""); inputRef.current?.focus(); }} data-testid="button-correct-reading" className="underline decoration-accent/50 underline-offset-2 hover:text-accent">Copy this into the box</button>, fix it, and ask again.</p>
                 </div>
               ) : (
-                <p className="mt-5 whitespace-pre-wrap text-sm text-muted-foreground" data-testid="text-question"><span className="mr-2 font-mono text-[11px] uppercase tracking-wider">Q</span>{current.question}</p>
+                <p className="mt-5 whitespace-pre-wrap text-sm text-muted-foreground" data-testid="text-question"><span className="mr-2 text-[11px] uppercase tracking-wider">Q</span>{current.question}</p>
               )}
 
               <div ref={solutionRef} data-testid="solution-body">
@@ -388,8 +388,8 @@ export default function Workspace() {
                   <span aria-hidden className="absolute bottom-6 left-[15px] top-6 w-px bg-accent/30" />
                   {s.steps.map((st, i) => (
                     <li key={i} data-testid={`step-${i}`}
-                      className={`relative rounded-2xl py-4 pl-12 pr-3 transition-colors duration-300 sm:pr-5 ${activeStep === i && panel.open ? "bg-[hsl(48_95%_62%/0.2)]" : ""}`}>
-                      <span className="absolute left-0 top-4 grid h-8 w-8 place-items-center rounded-full border border-accent/40 bg-background font-mono text-xs text-accent">{i + 1}</span>
+                      className={`relative rounded-2xl py-4 pl-12 pr-3 transition-colors duration-300 sm:pr-5 ${activeStep === i && panel.open ? "bg-highlight/90" : ""}`}>
+                      <span className="absolute left-0 top-4 grid h-8 w-8 place-items-center rounded-full border border-accent/40 bg-background text-xs text-accent">{i + 1}</span>
                       <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-1">
                         <h2 className="font-display text-xl font-semibold leading-snug">{st.title}</h2>
                         <button onClick={() => { setActiveStep(i); runExplain(`${st.kind === "concept" ? "Idea" : "Step"} ${i + 1}: ${st.title}\n${st.content}${st.equation ? `\n${st.equation}` : ""}`); }}
@@ -405,7 +405,7 @@ export default function Workspace() {
                 </ol>
 
                 <div className="mt-8 rounded-2xl bg-primary px-6 py-5 text-primary-foreground" data-testid="text-answer">
-                  <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-[hsl(48_95%_70%)]">Answer</p>
+                  <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-primary-label">Answer</p>
                   <RichText text={s.answer} className="mt-1 font-display text-xl" />
                 </div>
               </div>
@@ -475,7 +475,7 @@ export default function Workspace() {
             data-testid="button-explain-selection"
             style={{ top: floating.top, left: floating.left, x: "-50%" }}
             className="fixed z-50 inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-lg">
-            <MessageSquareQuote className="h-4 w-4 text-[hsl(48_95%_70%)]" /> Explain
+            <MessageSquareQuote className="h-4 w-4 text-primary-label" /> Explain
           </motion.button>
         )}
       </AnimatePresence>

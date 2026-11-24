@@ -1,1 +1,2 @@
 - [Math assistant purpose](math-assistant-purpose.md) — preserve the original solution; explain highlighted portions in a closable side panel, not a growing chat.
+- [Visual direction](visual-direction.md) — user chose clean Nunito Sans typography, soft sage surfaces and evergreen accents; preserve mathematical typesetting.

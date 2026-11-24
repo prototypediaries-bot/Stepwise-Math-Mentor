@@ -47,10 +47,10 @@ function Body({ s, onRetry, onClose, onMode }: P) {
         </button>
       </div>
       <div className="flex-1 overflow-y-auto px-6 py-5" aria-live="polite">
-        <figure className="relative rounded-lg bg-[hsl(48_95%_62%/0.28)] px-4 py-3 pl-5" data-testid="text-selected-quote">
+        <figure className="relative rounded-lg bg-highlight px-4 py-3 pl-5" data-testid="text-selected-quote">
           <span className="absolute inset-y-2 left-0 w-[3px] rounded-full bg-accent" />
           <figcaption className="mb-1 text-[11px] uppercase tracking-[0.16em] text-muted-foreground">You asked about</figcaption>
-          <blockquote className="line-clamp-6 whitespace-pre-wrap font-display text-[15px] italic leading-relaxed">{s.quote}</blockquote>
+          <blockquote className="line-clamp-6 whitespace-pre-wrap font-display text-[15px] leading-relaxed">{s.quote}</blockquote>
         </figure>
 
         <div className="mt-4 flex items-center justify-between gap-3">
