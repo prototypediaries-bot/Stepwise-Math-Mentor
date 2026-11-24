@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+.margin-technical {
+  --background: 210 28% 96%;
+  --foreground: 207 43% 16%;
+  --border: 207 20% 83%;
+  --input: 207 20% 80%;
+  --card: 0 0% 100%;
+  --card-foreground: 207 43% 16%;
+  --card-border: 207 20% 85%;
+  --sidebar: 210 25% 92%;
+  --sidebar-foreground: 207 43% 16%;
+  --sidebar-border: 207 20% 83%;
+  --sidebar-primary: 207 51% 22%;
+  --sidebar-primary-foreground: 210 28% 97%;
+  --sidebar-accent: 205 31% 87%;
+  --sidebar-accent-foreground: 207 43% 16%;
+  --sidebar-ring: 190 96% 35%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 207 43% 16%;
+  --popover-border: 207 20% 83%;
+  --primary: 207 51% 22%;
+  --primary-foreground: 210 28% 97%;
+  --secondary: 207 28% 90%;
+  --secondary-foreground: 207 43% 16%;
+  --muted: 207 25% 91%;
+  --muted-foreground: 208 19% 38%;
+  --accent: 190 96% 33%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 68% 44%;
+  --destructive-foreground: 0 0% 100%;
+  --ring: 190 96% 33%;
+  --chart-1: 190 96% 33%;
+  --chart-2: 207 51% 22%;
+  --chart-3: 36 88% 48%;
+  --chart-4: 165 45% 34%;
+  --chart-5: 222 48% 45%;
+  --app-font-sans: 'Space Grotesk', sans-serif;
+  --app-font-serif: 'Space Grotesk', sans-serif;
+  --app-font-mono: 'JetBrains Mono', monospace;
+  --font-sans: var(--app-font-sans);
+  --radius: 0.8rem;
+  color: hsl(var(--foreground));
+  font-family: var(--app-font-sans);
+}
+
+.margin-technical .font-display {
+  font-family: var(--app-font-sans) !important;
+  font-style: normal;
+  letter-spacing: -0.035em;
+}
+
+.margin-technical.grain::after {
+  display: none;
+}
+
+.margin-technical {
+  background-color: hsl(var(--background));
+  background-image: none;
+}
+
+.margin-technical ::selection {
+  background: hsl(190 90% 76% / 0.8);
+  color: hsl(207 43% 16%);
+}
+
+.margin-technical .margin-rule {
+  background-image: linear-gradient(90deg, transparent 0, transparent 46px, hsl(190 96% 33% / .45) 46px, hsl(190 96% 33% / .45) 47px, transparent 47px);
+}
+
+/* Harmonize the extracted yellow selection and takeaway surfaces with the cool system. */
+.margin-technical [data-testid^="step-"].bg-\[hsl\(48_95\%_62\%\/0\.2\)\] {
+  background-color: hsl(190 92% 84% / 0.68) !important;
+}
+
+.margin-technical [data-testid="text-selected-quote"] {
+  background-color: hsl(190 80% 91%) !important;
+}
+
+.margin-technical [data-testid="text-answer"] > p {
+  color: hsl(190 90% 76%) !important;
+}
+
+.margin-technical [data-testid="text-takeaway"] {
+  border-color: hsl(var(--accent) / 0.24);
+  background-color: hsl(var(--accent) / 0.055);
+}
+
+.margin-technical :focus-visible {
+  outline-color: hsl(var(--ring));
+}

@@ -1,0 +1,104 @@
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@400;450;500;550;600;650;700&display=swap");
+
+.neutral-preview {
+  --background: 210 25% 97%;
+  --foreground: 207 24% 16%;
+  --border: 207 22% 87%;
+  --input: 207 22% 82%;
+  --ring: 205 27% 46%;
+
+  --card: 210 33% 99%;
+  --card-foreground: 207 24% 16%;
+  --card-border: 207 22% 88%;
+
+  --sidebar: 207 28% 95%;
+  --sidebar-foreground: 207 24% 16%;
+  --sidebar-border: 207 22% 87%;
+  --sidebar-primary: 205 36% 29%;
+  --sidebar-primary-foreground: 200 33% 98%;
+  --sidebar-accent: 207 25% 91%;
+  --sidebar-accent-foreground: 207 24% 16%;
+  --sidebar-ring: 205 27% 46%;
+
+  --popover: 210 33% 99%;
+  --popover-foreground: 207 24% 16%;
+  --popover-border: 207 22% 87%;
+
+  --primary: 205 36% 29%;
+  --primary-foreground: 200 33% 98%;
+  --secondary: 207 25% 92%;
+  --secondary-foreground: 207 24% 19%;
+  --muted: 205 24% 93%;
+  --muted-foreground: 205 17% 38%;
+  --accent: 205 27% 46%;
+  --accent-foreground: 200 33% 98%;
+  --destructive: 0 58% 46%;
+  --destructive-foreground: 0 0% 99%;
+
+  --chart-1: 205 27% 46%;
+  --chart-2: 205 36% 29%;
+  --chart-3: 185 22% 48%;
+  --chart-4: 30 44% 54%;
+  --chart-5: 0 40% 54%;
+
+  --app-font-sans: "Geist", sans-serif;
+  --app-font-serif: "Geist", sans-serif;
+  --app-font-mono: "JetBrains Mono", monospace;
+  --button-outline: rgba(37, 59, 75, 0.12);
+  --badge-outline: rgba(37, 59, 75, 0.08);
+  --elevate-1: rgba(37, 59, 75, 0.035);
+  --elevate-2: rgba(37, 59, 75, 0.075);
+
+  min-height: 100dvh;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: var(--app-font-sans);
+  font-feature-settings: "ss01" on, "cv11" on;
+  -webkit-font-smoothing: antialiased;
+}
+
+.neutral-preview .font-display {
+  font-family: var(--app-font-sans);
+  font-weight: 550;
+  letter-spacing: -0.025em;
+}
+
+.neutral-preview .grain::after {
+  display: none;
+}
+
+.neutral-preview [data-testid="text-selected-quote"] {
+  background: hsl(205 38% 92%);
+}
+
+.neutral-preview [class*="48_95%_62%"] {
+  background-color: hsl(205 38% 92% / 0.82);
+}
+
+.neutral-preview [data-testid="text-answer"] > p:first-child {
+  color: hsl(200 25% 78%);
+}
+
+.neutral-preview .margin-rule {
+  background-image: linear-gradient(
+    90deg,
+    transparent 0,
+    transparent 46px,
+    hsl(var(--accent) / 0.45) 46px,
+    hsl(var(--accent) / 0.45) 47px,
+    transparent 47px
+  );
+}
+
+.neutral-preview ::selection {
+  background: hsl(205 34% 82% / 0.9);
+  color: hsl(var(--foreground));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .neutral-preview *,
+  .neutral-preview *::before,
+  .neutral-preview *::after {
+    scroll-behavior: auto;
+  }
+}
