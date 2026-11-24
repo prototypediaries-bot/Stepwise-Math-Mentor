@@ -13,3 +13,9 @@ The user also wants picture questions and complicated engineering/science proble
 **Why:** The user explicitly called out that theory-heavy questions need concept explanations, not forced step-by-step calculations.
 
 **How to apply:** Classify the highlighted material in context, not just the surrounding problem. A concept named inside a calculation still needs a conceptual explanation. Preserve the original answer and make a mistaken automatic classification correctable.
+
+The user wants less dense phrasing in each step while keeping all the content the same.
+
+**Why:** The user found the detailed answers too dense to read.
+
+**How to apply:** Retain full reasoning, equations, assumptions, caveats and examples. Use short sentences, one idea per paragraph, and bullets for parallel information rather than shortening away technical content.

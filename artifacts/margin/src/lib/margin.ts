@@ -52,26 +52,26 @@ export const EXAMPLE_SOLUTION: MathSolution = {
   title: "Solving a quadratic by factoring",
   subject: "Algebra",
   introduction:
-    "We want the values of $x$ that make $2x^2 - 5x - 3$ equal to zero. Because the leading coefficient is not 1, we use the **AC method** to split the middle term, then factor by grouping.",
+    "Find the values of $x$ that make $2x^2 - 5x - 3$ equal to zero.\n\nThe leading coefficient is not 1. We’ll use the **AC method**: split the middle term, then factor by grouping.",
   steps: [
     {
       title: "Find the product a·c",
-      content: "Identify $a = 2$, $b = -5$, $c = -3$. Multiply the first and last coefficients.",
+      content: "The coefficients are $a = 2$, $b = -5$ and $c = -3$.\n\nMultiply the first and last coefficients.",
       equation: "a \\cdot c = 2 \\cdot (-3) = -6",
     },
     {
       title: "Split the middle term",
-      content: "Look for two numbers that multiply to $-6$ and add to $b = -5$. Those are $-6$ and $1$, so rewrite $-5x$ as $-6x + x$.",
+      content: "Find two numbers that:\n\n- Multiply to $-6$.\n- Add to $b = -5$.\n\nThe numbers are $-6$ and $1$. Rewrite $-5x$ as $-6x + x$.",
       equation: "2x^2 - 6x + x - 3 = 0",
     },
     {
       title: "Factor by grouping",
-      content: "Pull the common factor out of each pair. Both groups share $(x - 3)$, which we then factor out.",
+      content: "Pull the common factor out of each pair of terms.\n\nBoth groups now contain $(x - 3)$. Factor it out.",
       equation: "2x(x - 3) + 1(x - 3) = (2x + 1)(x - 3) = 0",
     },
     {
       title: "Apply the zero-product property",
-      content: "A product is zero only when at least one factor is zero, so set each factor equal to zero and solve.",
+      content: "A product is zero only when at least one factor is zero.\n\nSet each factor equal to zero. Then solve each equation.",
       equation: "2x + 1 = 0 \\Rightarrow x = -\\tfrac{1}{2} \\qquad x - 3 = 0 \\Rightarrow x = 3",
     },
   ],
