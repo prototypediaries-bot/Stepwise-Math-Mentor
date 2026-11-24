@@ -4,6 +4,7 @@ import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import katex from "katex";
 import { cn } from "@/lib/utils";
+import { splitEquationRows } from "@/lib/equation-layout";
 
 export function RichText({ text, className }: { text: string; className?: string }) {
   return (
@@ -26,13 +27,20 @@ function stripDelims(t: string) {
 }
 
 export function Equation({ tex, className }: { tex: string; className?: string }) {
-  const html = useMemo(() => {
-    try {
-      return katex.renderToString(stripDelims(tex), { displayMode: true, throwOnError: false });
-    } catch {
-      return null;
-    }
+  const rows = useMemo(() => {
+    return splitEquationRows(stripDelims(tex)).map((row) => {
+      try {
+        return { tex: row, html: katex.renderToString(row, { displayMode: true, throwOnError: false }) };
+      } catch {
+        return { tex: row, html: null };
+      }
+    });
   }, [tex]);
-  if (!html) return <code className={className}>{tex}</code>;
-  return <div className={className} dangerouslySetInnerHTML={{ __html: html }} />;
+  return (
+    <div className={className}>
+      {rows.map((row, i) => row.html
+        ? <div key={i} dangerouslySetInnerHTML={{ __html: row.html }} />
+        : <code key={i} className="block whitespace-pre-wrap">{row.tex}</code>)}
+    </div>
+  );
 }

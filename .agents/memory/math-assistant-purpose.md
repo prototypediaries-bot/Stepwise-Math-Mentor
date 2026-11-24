@@ -14,8 +14,8 @@ The user also wants picture questions and complicated engineering/science proble
 
 **How to apply:** Classify the highlighted material in context, not just the surrounding problem. A concept named inside a calculation still needs a conceptual explanation. Preserve the original answer and make a mistaken automatic classification correctable.
 
-The user wants less dense phrasing in each step while keeping all the content the same.
+The user wants short, clearly separated math steps without small equation boxes. Keep one meaningful calculation per step.
 
-**Why:** The user found the detailed answers too dense to read.
+**Why:** The user found detailed answers too dense and calculations bunched together.
 
-**How to apply:** Retain full reasoning, equations, assumptions, caveats and examples. Use short sentences, one idea per paragraph, and bullets for parallel information rather than shortening away technical content.
+**How to apply:** Keep essential reasoning, intermediate results, units, assumptions and caveats. Omit routine prerequisite teaching from the main answer; students should use highlighting for that background in the side panel. Preserve concepts that are the actual subject of a theory question. This supersedes the earlier request to keep every explanatory detail in the main answer.

@@ -384,7 +384,7 @@ export default function Workspace() {
                 <h1 className="mt-3 font-display text-3xl font-semibold leading-tight tracking-tight sm:text-[40px]" data-testid="text-solution-title">{s.title}</h1>
                 <RichText text={s.introduction} className="mt-4 text-[17px] text-foreground/90" />
 
-                <ol className="relative mt-10 space-y-3">
+                <ol className="relative mt-10 space-y-6">
                   <span aria-hidden className="absolute bottom-6 left-[15px] top-6 w-px bg-accent/30" />
                   {s.steps.map((st, i) => (
                     <li key={i} data-testid={`step-${i}`}
@@ -399,7 +399,7 @@ export default function Workspace() {
                         </button>
                       </div>
                       <RichText text={st.content} className="mt-1 text-[16px] text-foreground/85" />
-                      {st.equation && <Equation tex={st.equation} className="mt-3 rounded-xl border border-border/80 bg-card/80 px-4 py-2 text-[1.05rem]" />}
+                      {st.equation && <Equation tex={st.equation} className="equation-flow mt-4 min-w-0 text-[1.05rem] sm:text-lg" />}
                     </li>
                   ))}
                 </ol>

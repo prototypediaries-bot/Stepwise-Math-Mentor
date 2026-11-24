@@ -52,27 +52,37 @@ export const EXAMPLE_SOLUTION: MathSolution = {
   title: "Solving a quadratic by factoring",
   subject: "Algebra",
   introduction:
-    "Find the values of $x$ that make $2x^2 - 5x - 3$ equal to zero.\n\nThe leading coefficient is not 1. We’ll use the **AC method**: split the middle term, then factor by grouping.",
+    "Use the **AC method** to split the middle term, then factor by grouping.",
   steps: [
     {
       title: "Find the product a·c",
-      content: "The coefficients are $a = 2$, $b = -5$ and $c = -3$.\n\nMultiply the first and last coefficients.",
+      content: "With $a = 2$ and $c = -3$, find $ac$.",
       equation: "a \\cdot c = 2 \\cdot (-3) = -6",
     },
     {
       title: "Split the middle term",
-      content: "Find two numbers that:\n\n- Multiply to $-6$.\n- Add to $b = -5$.\n\nThe numbers are $-6$ and $1$. Rewrite $-5x$ as $-6x + x$.",
+      content: "Use $-6$ and $1$: their product is $-6$ and their sum is $-5$.",
       equation: "2x^2 - 6x + x - 3 = 0",
     },
     {
-      title: "Factor by grouping",
-      content: "Pull the common factor out of each pair of terms.\n\nBoth groups now contain $(x - 3)$. Factor it out.",
-      equation: "2x(x - 3) + 1(x - 3) = (2x + 1)(x - 3) = 0",
+      title: "Factor each group",
+      content: "Factor the first two terms and the last two terms separately.",
+      equation: "2x(x - 3) + 1(x - 3) = 0",
     },
     {
-      title: "Apply the zero-product property",
-      content: "A product is zero only when at least one factor is zero.\n\nSet each factor equal to zero. Then solve each equation.",
-      equation: "2x + 1 = 0 \\Rightarrow x = -\\tfrac{1}{2} \\qquad x - 3 = 0 \\Rightarrow x = 3",
+      title: "Pull out the shared factor",
+      content: "Both groups contain $(x - 3)$.",
+      equation: "(2x + 1)(x - 3) = 0",
+    },
+    {
+      title: "Solve the first factor",
+      content: "Apply the **zero-product property** to $2x + 1$.",
+      equation: "2x + 1 = 0 \\Rightarrow x = -\\tfrac{1}{2}",
+    },
+    {
+      title: "Solve the second factor",
+      content: "Set the other factor to zero.",
+      equation: "x - 3 = 0 \\Rightarrow x = 3",
     },
   ],
   answer: "$x = -\\tfrac{1}{2}$ or $x = 3$",

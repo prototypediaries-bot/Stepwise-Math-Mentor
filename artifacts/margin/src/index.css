@@ -448,6 +448,8 @@
 .prose-margin code{font-family:var(--app-font-mono);font-size:.88em;background:hsl(var(--muted));padding:.1em .35em;border-radius:.3em}
 .prose-margin strong{font-weight:600}
 .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25em 0}
+.equation-flow .katex-display{margin:.8em 0;text-align:left}
+.equation-flow .katex-display > .katex{text-align:left}
 @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 .rise{animation:rise .55s cubic-bezier(.2,.7,.2,1) both}
 @keyframes shimmer{0%{opacity:.45}50%{opacity:1}100%{opacity:.45}}
