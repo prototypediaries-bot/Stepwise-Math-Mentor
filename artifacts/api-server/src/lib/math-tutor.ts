@@ -91,7 +91,10 @@ const solutionSchema = {
         },
       },
     },
-    answer: stringField,
+    answer: {
+      type: "string",
+      description: "A scan-friendly final answer in Markdown, not a dense paragraph. One result: put the result alone first. Multiple results: one labeled bullet per result, including units. Put necessary conditions in a separate blockquote starting **Conditions:**. No repeated derivation or preamble.",
+    },
   },
 };
 const explanationSchema = {
@@ -155,7 +158,19 @@ arbitrary computational steps. If an image is provided, interpretedQuestion MUST
 problem details and describe diagram relationships, values and units so the problem is understandable
 without the image; clearly mark anything unreadable. Without an image, interpretedQuestion must be
 an empty string. Missing information should be stated clearly in the introduction and answer.
-Answer must be a readable conclusion, using $...$ for any mathematics. Include checks in relevant sections.`
+The answer field is a result summary, not another explanation step. Make it readable on a first scan:
+- For one mathematical result, put the expression and its units alone in the opening paragraph.
+- For multiple solutions or requested quantities, give EACH result its own Markdown bullet.
+  Use a short bold label when it identifies the quantity, for example "- **Current:** $I=2\\,A$".
+  Do not join several results with commas, "and", "or", or a long sentence.
+- For a theory answer, open with one direct conclusion, then separate only essential supporting points
+  into short bullets if needed. Do not turn a nuanced or conditional claim into an absolute statement.
+- Put essential assumptions, validity ranges, rejected roots or qualifications AFTER the results,
+  in a separate Markdown blockquote starting with "**Conditions:**" or "**Note:**".
+  Keep conditions that change the meaning of the result, but do not repeat routine working.
+- Do not include a preamble such as "Therefore, after calculating..." or repeat the derivation, checks
+  and reasoning from the steps. Keep every requested final quantity, its units and sign/direction.
+Use $...$ or $$...$$ for mathematics. The answer must stand on its own without becoming a paragraph of working.`
         : `\nExplain ONLY the selected portion in context; do not regenerate the whole solution.
 The input mode is auto (default), step, or concept. In auto, infer intent from the EXACT selected text
 and surrounding solution: a named law, property, term, physical idea, assumption, or 'why' needs a CONCEPT

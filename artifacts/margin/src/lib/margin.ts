@@ -85,5 +85,5 @@ export const EXAMPLE_SOLUTION: MathSolution = {
       equation: "x - 3 = 0 \\Rightarrow x = 3",
     },
   ],
-  answer: "$x = -\\tfrac{1}{2}$ or $x = 3$",
+  answer: "- $x = -\\tfrac{1}{2}$\n- $x = 3$",
 };

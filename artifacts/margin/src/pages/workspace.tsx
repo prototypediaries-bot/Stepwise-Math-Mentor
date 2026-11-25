@@ -7,6 +7,7 @@ import { useAuth } from "@workspace/replit-auth-web";
 import { Sheet, SheetContent, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import { useToast } from "@/hooks/use-toast";
 import { RichText, Equation } from "@/components/rich-text";
+import { FinalAnswer } from "@/components/final-answer";
 import { ExplainPanel, type ExplainState } from "@/components/explain-panel";
 import {
   EXAMPLE_QUESTION, EXAMPLE_SOLUTION, loadHistory, saveHistory, serializeSolution, type SavedProblem,
@@ -404,10 +405,7 @@ export default function Workspace() {
                   ))}
                 </ol>
 
-                <div className="mt-8 rounded-2xl bg-primary px-6 py-5 text-primary-foreground" data-testid="text-answer">
-                  <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-primary-label">Answer</p>
-                  <RichText text={s.answer} className="mt-1 font-display text-xl" />
-                </div>
+                <FinalAnswer answer={s.answer} />
               </div>
             </article>
           )}

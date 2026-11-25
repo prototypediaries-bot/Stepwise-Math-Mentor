@@ -450,6 +450,19 @@
 .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25em 0}
 .equation-flow .katex-display{margin:.8em 0;text-align:left}
 .equation-flow .katex-display > .katex{text-align:left}
+.answer-summary{font-size:1rem;line-height:1.6;overflow-wrap:anywhere}
+.answer-summary > p:first-child{margin:0;font-size:1.3rem;font-weight:600;line-height:1.6}
+.answer-summary > ul,.answer-summary > ol{margin:0;padding:0;list-style:none}
+.answer-summary > ul > li,.answer-summary > ol > li{padding:.85rem 0;border-bottom:1px solid hsl(var(--primary-foreground) / .18);font-size:1.2rem;line-height:1.65}
+.answer-summary > ul > li:first-child,.answer-summary > ol > li:first-child{padding-top:0}
+.answer-summary > ul > li:last-child,.answer-summary > ol > li:last-child{padding-bottom:0;border-bottom:0}
+.answer-summary li > p{margin:0}
+.answer-summary li > strong:first-child,.answer-summary li > p > strong:first-child{display:block;margin-bottom:.2rem;color:hsl(var(--primary-label));font-size:.85rem;font-weight:600}
+.answer-summary > p + ul,.answer-summary > p + ol{margin-top:1rem}
+.answer-summary > p:not(:first-child),.answer-summary > blockquote{margin:1.25rem 0 0;padding-top:1rem;border-top:1px solid hsl(var(--primary-foreground) / .22);font-size:.925rem;line-height:1.7}
+.answer-summary > blockquote p{margin:0}
+.answer-summary .katex-display{margin:.3em 0;text-align:left}
+.answer-summary .katex-display > .katex{text-align:left}
 @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 .rise{animation:rise .55s cubic-bezier(.2,.7,.2,1) both}
 @keyframes shimmer{0%{opacity:.45}50%{opacity:1}100%{opacity:.45}}
