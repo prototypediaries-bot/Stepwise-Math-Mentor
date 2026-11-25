@@ -16,6 +16,6 @@ The user also wants picture questions and complicated engineering/science proble
 
 The user wants short, clearly separated math steps without small equation boxes. Keep one meaningful calculation per step.
 
-**Why:** The user found detailed answers too dense and calculations bunched together.
+**Why:** The user found detailed answers too dense and calculations bunched together. They subsequently confirmed that the shorter step length and phrasing were suitable.
 
 **How to apply:** Keep essential reasoning, intermediate results, units, assumptions and caveats. Omit routine prerequisite teaching from the main answer; students should use highlighting for that background in the side panel. Preserve concepts that are the actual subject of a theory question. This supersedes the earlier request to keep every explanatory detail in the main answer.

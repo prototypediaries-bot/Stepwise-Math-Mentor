@@ -48,17 +48,32 @@ Give each section a short, descriptive title and one main action or conceptual q
 long chain into meaningful sections without omitting links or creating a separate section per sentence.
 State the action or central idea directly. Add a reason when it is a meaningful part of solving this
 particular question, not a routine definition or a reminder of basic algebra.
+Apply correct, consistent English capitalization throughout both solutions and side-panel explanations.
+Use Title Case for the main title, subject label, step titles and explanation title: capitalize the
+first and last words and all main words, keeping short articles, conjunctions and prepositions lowercase
+unless they start or end the heading. For example: "Solve the First Factor" and "Apply Kirchhoff's Voltage Law".
+In body prose, use normal sentence case. Capitalize sentence beginnings, complete-sentence bullet points,
+the pronoun I, proper names and the proper-name parts of scientific laws and methods, such as Newton,
+Ohm, Kirchhoff, Fourier and Laplace. Use established acronym casing, such as STEM, SI, DC, AC, RMS and pH.
+Do not capitalize every technical noun or every word of a sentence; common terms remain lowercase in prose.
+Preserve the exact, meaningful case of mathematical variables, Greek symbols, chemical formulas,
+case-sensitive identifiers and SI unit symbols or prefixes (x versus X, v versus V, mW versus MW,
+Pa, kPa, Hz and NaCl). Never uppercase a math symbol merely because it begins a sentence or heading.
+When transcribing a picture or quoting the user's selection, preserve the source text rather than
+silently changing its notation. Before returning the JSON, proofread the generated prose and headings
+for capitalization without changing the answer's length, calculations or level of detail.
 This is educational assistance, not a validated engineering design or safety certification.
 Return only the JSON object matching the supplied schema.`;
 
 const stringField = { type: "string" };
+const titleField = { type: "string", description: "A short heading in Title Case. Capitalize main words, but preserve the case of mathematical symbols, chemical formulas and acronyms." };
 const solutionSchema = {
   type: "object",
   additionalProperties: false,
   required: ["title", "subject", "introduction", "steps", "answer", "interpretedQuestion", "problemType"],
   properties: {
-    title: stringField,
-    subject: stringField,
+    title: titleField,
+    subject: titleField,
     introduction: stringField,
     interpretedQuestion: stringField,
     problemType: { type: "string", enum: ["worked", "conceptual", "mixed"] },
@@ -69,7 +84,7 @@ const solutionSchema = {
         additionalProperties: false,
         required: ["title", "content", "equation", "kind"],
         properties: {
-          title: stringField,
+          title: titleField,
           content: { type: "string", description: "A short action sentence for this step. Omit routine prerequisite definitions; they belong in the highlight explanation. Preserve reasoning essential to the question." },
           equation: { type: "string", description: "LaTeX for ONE main transformation or result only, or empty for a concept. Never join independent branches or results using or, wide spacing, aligned environments or a long chain. Put each branch in its own step. Escape LaTeX backslashes correctly in JSON; do not emit literal control characters." },
           kind: { type: "string", enum: ["calculation", "concept"] },
@@ -84,7 +99,7 @@ const explanationSchema = {
   additionalProperties: false,
   required: ["title", "explanation", "takeaway", "kind"],
   properties: {
-    title: stringField, explanation: stringField, takeaway: stringField,
+    title: titleField, explanation: stringField, takeaway: stringField,
     kind: { type: "string", enum: ["step", "concept", "mixed"] },
   },
 };

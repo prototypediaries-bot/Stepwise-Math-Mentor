@@ -49,38 +49,38 @@ export function serializeSolution(q: string, s: MathSolution): string {
 export const EXAMPLE_QUESTION = "Solve for x: 2x^2 - 5x - 3 = 0";
 
 export const EXAMPLE_SOLUTION: MathSolution = {
-  title: "Solving a quadratic by factoring",
+  title: "Solving a Quadratic by Factoring",
   subject: "Algebra",
   introduction:
     "Use the **AC method** to split the middle term, then factor by grouping.",
   steps: [
     {
-      title: "Find the product a·c",
+      title: "Find the Product a·c",
       content: "With $a = 2$ and $c = -3$, find $ac$.",
       equation: "a \\cdot c = 2 \\cdot (-3) = -6",
     },
     {
-      title: "Split the middle term",
+      title: "Split the Middle Term",
       content: "Use $-6$ and $1$: their product is $-6$ and their sum is $-5$.",
       equation: "2x^2 - 6x + x - 3 = 0",
     },
     {
-      title: "Factor each group",
+      title: "Factor Each Group",
       content: "Factor the first two terms and the last two terms separately.",
       equation: "2x(x - 3) + 1(x - 3) = 0",
     },
     {
-      title: "Pull out the shared factor",
+      title: "Pull Out the Shared Factor",
       content: "Both groups contain $(x - 3)$.",
       equation: "(2x + 1)(x - 3) = 0",
     },
     {
-      title: "Solve the first factor",
+      title: "Solve the First Factor",
       content: "Apply the **zero-product property** to $2x + 1$.",
       equation: "2x + 1 = 0 \\Rightarrow x = -\\tfrac{1}{2}",
     },
     {
-      title: "Solve the second factor",
+      title: "Solve the Second Factor",
       content: "Set the other factor to zero.",
       equation: "x - 3 = 0 \\Rightarrow x = 3",
     },
